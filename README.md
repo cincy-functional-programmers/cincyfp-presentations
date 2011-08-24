@@ -19,5 +19,5 @@ Each meeting has a subdirectory to hold the presentation and any associated file
 </tbody>
 </table>
 
-[blog] http://cincyfp.wordpress.com/
-[mtg]  http://www.meetup.com/TechLife-Cincinnati/
+[blog]: http://cincyfp.wordpress.com/
+[mtg]:  http://www.meetup.com/TechLife-Cincinnati/
