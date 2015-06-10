@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Chris Hodapp" />
+  <title>Embedded Haskell, part 1: EDSLs &amp; Metaprogramming</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!-- configuration parameters -->
+  <meta name="defaultView" content="slideshow" />
+  <meta name="controlVis" content="hidden" />
+  <!-- style sheet links -->
+  <link rel="stylesheet" href="s5/default/slides.css" type="text/css" media="projection" id="slideProj" />
+  <link rel="stylesheet" href="s5/default/outline.css" type="text/css" media="screen" id="outlineStyle" />
+  <link rel="stylesheet" href="s5/default/print.css" type="text/css" media="print" id="slidePrint" />
+  <link rel="stylesheet" href="s5/default/opera.css" type="text/css" media="projection" id="operaFix" />
+  <!-- S5 JS -->
+  <script src="s5/default/slides.js" type="text/javascript"></script>
+</head>
+<body>
+<div class="layout">
+<div id="controls"></div>
+<div id="currentSlide"></div>
+<div id="header"></div>
+<div id="footer">
+  <h1>CincyFP, 2015-06-09</h1>
+  <h2>Embedded Haskell, part 1: EDSLs &amp; Metaprogramming</h2>
+</div>
+</div>
+<div class="presentation">
+<div class="titleslide slide">
+  <h1>Embedded Haskell, part 1: EDSLs &amp; Metaprogramming</h1>
+  <h2>Chris Hodapp</h2>
+  <h3>CincyFP, 2015-06-09</h3>
+</div>
+<div id="why-use-haskell-there-at-all" class="slide section level1">
+<h1>Why use Haskell there at all?</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>Because you can.</li>
+<li>With apologies to Kernighan &amp; Ritchie: Because hand-written C is kind of horrid for this. (And with apologies to no one: Because C++ is also a train-wreck.)</li>
+<li>Because Haskell has a very powerful type system, and this can work wonders when dealing with embedded systems that are notoriously finicky and fragile.</li>
+<li>Because arcane concepts like &quot;functional programming&quot; and &quot;pure functions&quot; and &quot;monads&quot; turn out to be useful for something besides ivory-tower navel-gazing.</li>
+</ol>
+</div>
+<div id="approaches-to-embedded-haskell" class="slide section level1">
+<h1>Approaches to embedded Haskell</h1>
+<p><em>Disclaimer:</em> I made these categories up, and I'm excluding languages like Cryptol and Idris that only incidentally involve Haskell.</p>
+<ul>
+<li>Full compilation, reduced runtime approach</li>
+<li>Static analysis approach</li>
+<li>Compiled EDSL approach (the focus of this presentation)</li>
+</ul>
+</div>
+<div id="full-compilation-reduced-runtime" class="slide section level1">
+<h1>Full compilation, reduced runtime</h1>
+<p>This compiles Haskell code to run directly on an embedded target. This requires:</p>
+<ul>
+<li>reducing the fairly heavy Haskell runtime,</li>
+<li>optimizing the garbage collection,</li>
+<li>making the lazy evaluation less of a pain.</li>
+</ul>
+<div class="incremental">
+<p>Ajhc (<a href="https://github.com/ajhc/ajhc" class="uri">https://github.com/ajhc/ajhc</a>), a JHC-derived compiler from Kiwamu Okabe of METASEPI, is the only example of this I found - it could compile and execute on ARM Cortex-M3/M4. His subsequent switch to the ATS language may be a hint.</p>
+</div>
+</div>
+<div id="static-analysis" class="slide section level1">
+<h1>Static analysis</h1>
+<p>This uses an existing compiler for certain stages (such as the parsing and type-checking), but a custom back-end to actually produce code. This may adapt or disallow certain constructs.</p>
+<p>GHC readily accomodates this by allowing developers to invoke GHC functionality, from Haskell, as a library. (<em>GHCJS</em>, a Haskell to JavaScript compiler, uses this.)</p>
+</div>
+<div id="static-analysis-examples" class="slide section level1">
+<h1>Static analysis examples</h1>
+<p><em>CλaSH</em> (<a href="http://www.clash-lang.org/" class="uri">http://www.clash-lang.org/</a>) from Christiaan Baaij uses this to compile a subset of Haskell to VHDL and SystemVerilog. CλaSH disallows certain things: recursive functions, recursive types, side effects, floating-point...</p>
+<div class="incremental">
+<p><em>Reduceron</em> (<a href="https://github.com/tommythorn/Reduceron" class="uri">https://github.com/tommythorn/Reduceron</a>) is an &quot;FPGA Haskell machine&quot; relying on massively-parallel graph reduction, complete with GC and lazy evaluation.</p>
+</div>
+<div class="incremental">
+<p>Conal Elliott worked with a Silicon Valley startup, <em>Tabula</em>, on massively-parallel execution of Haskell code on a new architecture (<em>Spacetime</em>), using an approach based on Cartesian Closed Categories (<a href="http://conal.net/blog/posts/haskell-to-hardware-via-cccs" class="uri">http://conal.net/blog/posts/haskell-to-hardware-via-cccs</a> &amp; <a href="https://github.com/conal/lambda-ccc/" class="uri">https://github.com/conal/lambda-ccc/</a>).</p>
+</div>
+</div>
+<div id="compiled-edsl" class="slide section level1">
+<h1>Compiled EDSL</h1>
+<p>This uses an EDSL (embedded domain-specific language) inside of Haskell to direct the process of code generation to a lower-level representation. (Otherwise called: <em>compiling</em>.)</p>
+<p>Note that in this case, Haskell code never actually <em>runs</em> on the embedded target. Rather, it uses specifications in the EDSL to build a representation of what <em>will</em> run there - in other words, a sort of Haskell-driven metaprogramming.</p>
+<p>The code that runs on the target is entirely decoupled from the Haskell runtime.</p>
+</div>
+<div id="compiled-edsl-examples" class="slide section level1">
+<h1>Compiled EDSL: Examples</h1>
+<ul class="incremental">
+<li>The entire <em>Lava</em> family for circuit design and verification. (Compiles to: VHDL, Verilog, netlist? Reduceron from a few slides ago is implemented in York Lava.)</li>
+<li><em>Atom</em> for reactive, hard real-time, synchronous systems. (Compiles to: C)</li>
+<li><em>Copilot</em> for stream-oriented, hard real-time systems. (Compiles to: C via Atom &amp; SBV, CBMC model checker)</li>
+<li><em>SBV</em> for theorem proving oriented around SMT. (Compiles to: C, various SMT solvers)</li>
+<li><em>Ivory</em> for safe systems programming. (Compiles to: C, LLVM(?), CVC4 &amp; ACL2 theorem provers)</li>
+</ul>
+</div>
+<div id="atom-edsl" class="slide section level1">
+<h1>Atom EDSL</h1>
+<p><a href="http://hackage.haskell.org/package/atom" class="uri">http://hackage.haskell.org/package/atom</a></p>
+<p>Short version: Atom is a <em>synchronous language</em>: One specifies rules that apply on specific clock ticks, and all rules are atomic. Feed a specification into Atom, and Atom generates fairly bulletproof, deterministic C code.</p>
+<p>Official (long) version: <em>&quot;Atom is a Haskell EDSL for designing hard realtime embedded software. Based on guarded atomic actions (similar to STM), Atom enables highly concurrent programming without the need for mutex locking. In addition, Atom performs compile-time task scheduling and generates code with deterministic execution time and constant memory use, simplifying the process of timing verification and memory consumption in hard realtime applications. Without mutex locking and run-time task scheduling, Atom eliminates the need and overhead of RTOSes for many embedded applications.&quot;</em></p>
+</div>
+<div id="imaginary-atom-scenario" class="slide section level1">
+<h1>Imaginary Atom scenario</h1>
+<ol class="incremental" style="list-style-type: decimal">
+<li>You have a fairly resource-constrained microcontroller.</li>
+<li>It needs to keep track of time in seconds.</li>
+<li>It contains a hardware watchdog timer which you must reset every 15 milliseconds.</li>
+<li>You must monitor an input voltage. If it ever goes below 1.9 V, then the microcontroller must cease all other operation (aside from resetting the watchdog) until it has stayed above 2.0 V for at least 5 milliseconds.</li>
+<li>It has an input button. If it is pressed for at least 50 milliseconds, some respective output pin should be activated.</li>
+<li>It also has 15 other buttons (and respective output pins) that behave the same way.</li>
+</ol>
+</div>
+<div id="my-workflow-for-those-interested" class="slide section level1">
+<h1>My workflow, for those interested</h1>
+<ul>
+<li>Haskell code contains:
+<ul>
+<li>Specifications in Atom &amp; Ivory</li>
+<li>Build targets for Shake (a Haskell-based build system similar to Make)</li>
+</ul></li>
+<li>Shake build is responsible for:
+<ul>
+<li>Generating C code with Atom &amp; Ivory</li>
+<li>Compiling &amp; linking C code with GCC</li>
+<li>Producing a firmware image and commands for flashing it</li>
+</ul></li>
+<li>GDB communicates with GDB server</li>
+<li>JLink/OpenOCD implements GDB server and communicates with target via SWD</li>
+<li>Emacs communicates with GDB, handles Haskell and C code, and handles Shake build</li>
+</ul>
+</div>
+<div id="references-mindless-self-promotion" class="slide section level1">
+<h1>References &amp; Mindless Self-Promotion</h1>
+<p>Nearly everything that I reference should have a link at: <a href="http://haskellembedded.github.io/pages/links.html" class="uri">http://haskellembedded.github.io/pages/links.html</a></p>
+<p>My Atom introduction is at: <a href="http://haskellembedded.github.io/posts/2015-02-17-atom-examples.html" class="uri">http://haskellembedded.github.io/posts/2015-02-17-atom-examples.html</a></p>
+<p>In explaining the &quot;How?&quot; and &quot;What?&quot;, I probably ignored much of the &quot;Why?&quot;, and this explains some of that: <a href="http://haskellembedded.github.io/posts/2015-02-06-how-i-got-here.html" class="uri">http://haskellembedded.github.io/posts/2015-02-06-how-i-got-here.html</a></p>
+<p>See the <em>#haskell-embedded</em> IRC channel on Freenode to find me (<em>hodapp</em>) and a bunch of other people who are way better at this than I am.</p>
+</div>
+</div>
+</body>
+</html>
