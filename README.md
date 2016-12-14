@@ -13,7 +13,9 @@ Each meeting has a subdirectory to hold the presentation and any associated file
 <table>
 <thead><tr><th>Month</th><th>Topic</th><th>Presenter</th></tr></thead>
 <tbody>
-<tr><td>2015 June   </td><td>Atom talk        </td><td>Chris Hodapp        </td></tr>
+<tr><td>2016 December</td><td>R & Feature Transformation</td><td>Chris Hodapp</td></tr>
+<tr><td>2016 May</td><td>Word Vectors & Clojure</td><td>Carin Meier   </td></tr>
+<tr><td>2015 June   </td><td>Haskell & Atom talk </td><td>Chris Hodapp     </td></tr>
 <tr><td>2011 August </td><td>Functional Ruby  </td><td>Rob Biedenharn      </td></tr>
 <tr><td>2011 July   </td><td>Scala            </td><td>Benjamin Kyrlach    </td></tr>
 <tr><td>2011 June   </td><td>Clojure in Action</td><td>Creighton Kirkendall</td></tr>
