@@ -1,0 +1,6 @@
+c:\users\bkyrlach\documents\visual studio 14\Projects\LFFP\LFFP\bin\Debug\LFFP.exe.config
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\LFFP\bin\Debug\LFFP.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\LFFP\bin\Debug\LFFP.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\LFFP\obj\Debug\LFFP.csprojResolveAssemblyReference.cache
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\LFFP\obj\Debug\LFFP.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\LFFP\obj\Debug\LFFP.pdb

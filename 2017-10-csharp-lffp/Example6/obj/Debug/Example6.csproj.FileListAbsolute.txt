@@ -1,0 +1,10 @@
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Example6.exe.config
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Example6.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Example6.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Example5.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Readonly.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Example5.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\bin\Debug\Readonly.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\obj\Debug\Example6.csprojResolveAssemblyReference.cache
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\obj\Debug\Example6.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example6\obj\Debug\Example6.pdb

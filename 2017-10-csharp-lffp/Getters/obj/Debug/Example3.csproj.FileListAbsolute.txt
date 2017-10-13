@@ -1,0 +1,6 @@
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\bin\Debug\Getters.exe.config
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\bin\Debug\Getters.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\bin\Debug\Getters.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\obj\Debug\Getters.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\obj\Debug\Getters.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Getters\obj\Debug\Example3.csprojResolveAssemblyReference.cache

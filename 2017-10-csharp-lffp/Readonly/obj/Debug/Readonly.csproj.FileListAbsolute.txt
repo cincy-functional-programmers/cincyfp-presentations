@@ -1,0 +1,5 @@
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Readonly\bin\Debug\Readonly.exe.config
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Readonly\bin\Debug\Readonly.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Readonly\bin\Debug\Readonly.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Readonly\obj\Debug\Readonly.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Readonly\obj\Debug\Readonly.pdb

@@ -1,0 +1,8 @@
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\bin\Debug\Example4.exe.config
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\bin\Debug\Example4.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\bin\Debug\Example4.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\obj\Debug\Example4.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\obj\Debug\Example4.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\bin\Debug\Readonly.exe
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\bin\Debug\Readonly.pdb
+C:\Users\bkyrlach\Documents\Visual Studio 14\Projects\LFFP\Example4\obj\Debug\Example4.csprojResolveAssemblyReference.cache
